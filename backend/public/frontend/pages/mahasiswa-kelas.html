@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelas Saya - E-Tugas</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="brand">📚 E-<span>Tugas</span></div>
+            <nav>
+                <a href="#" onclick="window.location.href='mahasiswa-dashboard.html'">📊 Dashboard</a>
+                <a href="#" onclick="window.location.href='mahasiswa-tugas.html'">📋 Tugas Saya</a>
+                <a href="#" onclick="window.location.href='mahasiswa-nilai.html'">📊 Nilai</a>
+                <a href="#" class="active">📚 Kelas Saya</a>
+                <a href="#" onclick="logout()">🚪 Logout</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- TOPBAR -->
+            <header class="topbar">
+                <h2>📚 Kelas Saya</h2>
+                <div class="user-info">
+                    <span id="mhsName">Mahasiswa</span>
+                    <div class="avatar" id="mhsAvatar">M</div>
+                </div>
+            </header>
+
+            <!-- INFO MAHASISWA -->
+            <div class="card" style="margin-bottom: 1rem;">
+                <div id="mhsInfo">
+                    <p><strong>Nama:</strong> <span id="mhsNama">-</span></p>
+                    <p><strong>NPM:</strong> <span id="mhsNpm">-</span></p>
+                    <p><strong>Prodi:</strong> <span id="mhsProdi">-</span></p>
+                    <p><strong>Angkatan:</strong> <span id="mhsAngkatan">-</span></p>
+                </div>
+            </div>
+
+            <!-- FILTER -->
+            <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap;">
+                <div class="form-group" style="margin-bottom: 0;">
+                    <select id="filterStatus" class="form-control" style="width: auto; min-width: 140px;" onchange="applyFilter()">
+                        <option value="all">🔄 Semua Status</option>
+                        <option value="aktif">🟢 Aktif</option>
+                        <option value="ditutup">🔴 Ditutup</option>
+                    </select>
+                </div>
+                <span id="totalKelasFilter" style="color: var(--gray-500); font-size: 0.875rem;"></span>
+            </div>
+
+            <!-- TABEL KELAS -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">📚 Daftar Kelas Yang Diikuti</h3>
+                </div>
+                <div class="table-container">
+                    <table class="table" id="kelasTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nama Kelas</th>
+                                <th>Kode</th>
+                                <th>Dosen</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="kelasTableBody">
+                            <tr><td colspan="6" class="text-center">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/mahasiswa-kelas.js"></script>
+</body>
+</html>

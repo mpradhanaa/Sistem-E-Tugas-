@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dosen Dashboard - E-Tugas</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+    <div class="brand">📚 E-<span>Tugas</span></div>
+    <nav>
+        <a href="#" class="active" onclick="location.reload()">📊 Dashboard</a>
+        <a href="#" onclick="window.location.href='dosen-kelas.html'">📚 Kelas Saya</a>
+        <a href="#" onclick="showBukaKelas()">✏️ Buka Kelas</a>
+        <a href="#" onclick="window.location.href='dosen-nilai.html'">📝 Nilai</a>
+        <a href="#" onclick="showChangePassword()">🔑 Ubah Password</a>
+        <a href="#" onclick="logout()">🚪 Logout</a>
+    </nav>
+</aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- TOPBAR -->
+            <header class="topbar">
+                <h2>Dashboard Dosen</h2>
+<div class="user-info">
+    <span id="dosenName">Dosen</span>
+    <div class="avatar" id="dosenAvatar" onclick="showChangePassword()" style="cursor: pointer;" title="Klik untuk ubah password">D</div>
+</div>
+
+
+            </header>
+
+            <!-- STATS -->
+            <div class="stats-grid" id="statsContainer">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalKelas">0</div>
+                    <div class="stat-label">📚 Total Kelas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalTugas">0</div>
+                    <div class="stat-label">📝 Total Tugas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalPengumpulan">0</div>
+                    <div class="stat-label">📥 Total Pengumpulan</div>
+                </div>
+            </div>
+
+            <!-- DAFTAR KELAS -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">📚 Daftar Kelas Yang Diampu</h3>
+                    <button class="btn btn-primary btn-sm" onclick="showBukaKelas()">+ Buka Kelas</button>
+                </div>
+                <div class="table-container">
+                    <table class="table" id="kelasTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nama Kelas</th>
+                                <th>Kode</th>
+                                <th>Prodi</th>
+                                <th>Angkatan</th>
+                                <th>Kelas</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="kelasTableBody">
+                            <tr><td colspan="8" class="text-center">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL BUKA KELAS -->
+    <div class="modal-overlay" id="bukaKelasModal">
+        <div class="modal">
+            <h3 class="modal-title">✏️ Buka Kelas Baru</h3>
+            <form id="bukaKelasForm">
+                <div class="form-group">
+                    <label for="namaKelas">Nama Kelas</label>
+                    <input type="text" id="namaKelas" class="form-control" placeholder="Contoh: Pemrograman Web 1" required>
+                </div>
+                <div class="form-group">
+                    <label for="kodeKelas">Kode Kelas</label>
+                    <input type="text" id="kodeKelas" class="form-control" placeholder="Contoh: WEB101" required>
+                </div>
+                <div class="form-group">
+                    <label for="deskripsiKelas">Deskripsi (Opsional)</label>
+                    <input type="text" id="deskripsiKelas" class="form-control" placeholder="Deskripsi kelas">
+                </div>
+                <div class="form-group">
+                    <label for="prodiKelas">Program Studi</label>
+                    <select id="prodiKelas" class="form-control">
+                        <option value="TI">Teknik Informatika</option>
+                        <option value="SI">Sistem Informasi</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="angkatanKelas">Angkatan</label>
+                    <select id="angkatanKelas" class="form-control">
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="kelasKelas">Kelas</label>
+                    <select id="kelasKelas" class="form-control">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">💾 Buka Kelas</button>
+                    <button type="button" class="btn btn-outline" onclick="closeBukaKelas()">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL TUTUP KELAS (Konfirmasi) -->
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal" style="max-width: 400px;">
+            <h3 class="modal-title">⚠️ Konfirmasi</h3>
+            <p id="confirmMessage">Apakah Anda yakin?</p>
+            <div class="modal-actions">
+                <button class="btn btn-danger" id="confirmYesBtn">Ya</button>
+                <button class="btn btn-outline" onclick="closeConfirm()">Batal</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL UBAH PASSWORD -->
+<div class="modal-overlay" id="passwordModal">
+    <div class="modal" style="max-width: 400px;">
+        <h3 class="modal-title">🔑 Ubah Password</h3>
+        <form id="passwordForm">
+            <div class="form-group">
+                <label for="oldPassword">Password Lama</label>
+                <input type="password" id="oldPassword" class="form-control" placeholder="Masukkan password lama" required>
+            </div>
+            <div class="form-group">
+                <label for="newPassword">Password Baru</label>
+                <input type="password" id="newPassword" class="form-control" placeholder="Minimal 6 karakter" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Konfirmasi Password Baru</label>
+                <input type="password" id="confirmPassword" class="form-control" placeholder="Ulangi password baru" required>
+            </div>
+            <div id="passwordMessage" class="error" style="margin-top: 0.5rem; display: none;"></div>
+            <div class="modal-actions">
+                <button type="submit" class="btn btn-primary" id="savePasswordBtn">💾 Simpan</button>
+                <button type="button" class="btn btn-outline" onclick="closePasswordModal()">Batal</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/dosen.js"></script>
+</body>
+</html>

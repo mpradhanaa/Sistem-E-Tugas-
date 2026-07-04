@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola User - E-Tugas</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="brand">📚 E-<span>Tugas</span></div>
+            <nav>
+                <a href="#" onclick="window.location.href='admin-dashboard.html'">📊 Dashboard</a>
+                <a href="#" class="active">👥 Kelola User</a>
+                <a href="#" onclick="showChangePassword()">🔑 Ubah Password</a> <!-- 🔥 TAMBAHKAN INI -->
+                <a href="#" onclick="logout()">🚪 Logout</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- TOPBAR -->
+            <header class="topbar">
+                <h2>👥 Kelola User</h2>
+                <div class="user-info">
+                    <span id="adminName">Admin</span>
+                    <div class="avatar" id="adminAvatar" onclick="showChangePassword()" style="cursor: pointer;" title="Klik untuk ubah password">A</div>
+                </div>
+            </header>
+
+            <!-- FILTER & TOMBOL TAMBAH -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <select id="filterRole" class="form-control" style="width: auto; min-width: 140px;" onchange="applyFilters()">
+                            <option value="all">📋 Semua Role</option>
+                            <option value="admin">🔐 Admin</option>
+                            <option value="dosen">👨‍🏫 Dosen</option>
+                            <option value="mahasiswa">👨‍🎓 Mahasiswa</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <select id="filterProdi" class="form-control" style="width: auto; min-width: 140px;" onchange="applyFilters()">
+                            <option value="all">📚 Semua Prodi</option>
+                            <option value="TI">Teknik Informatika</option>
+                            <option value="SI">Sistem Informasi</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <select id="filterAngkatan" class="form-control" style="width: auto; min-width: 120px;" onchange="applyFilters()">
+                            <option value="all">📅 Semua Angkatan</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-outline btn-sm" onclick="resetFilters()">🔄 Reset</button>
+                </div>
+                <div>
+                    <button class="btn btn-primary btn-sm" onclick="showModal('dosen')">+ Tambah Dosen</button>
+                    <button class="btn btn-success btn-sm" onclick="showModal('mahasiswa')">+ Tambah Mahasiswa</button>
+                </div>
+            </div>
+
+            <!-- TABEL USER -->
+            <div class="card">
+                <div class="table-container">
+                    <table class="table" id="userTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Nama</th>
+                                <th>Role</th>
+                                <th>Prodi</th>
+                                <th>Angkatan</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userTableBody">
+                            <tr><td colspan="7" class="text-center">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL TAMBAH/EDIT USER -->
+    <div class="modal-overlay" id="userModal">
+        <div class="modal">
+            <h3 class="modal-title" id="modalTitle">Tambah User</h3>
+            <form id="userForm">
+                <input type="hidden" id="userRole">
+                <input type="hidden" id="editUserId">
+
+                <div class="form-group">
+                    <label for="usernameInput">Username</label>
+                    <input type="text" id="usernameInput" class="form-control" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <label for="nameInput">Nama Lengkap</label>
+                    <input type="text" id="nameInput" class="form-control" placeholder="Nama lengkap" required>
+                </div>
+                <div class="form-group">
+                    <label for="passwordInput">Password</label>
+                    <input type="password" id="passwordInput" class="form-control" placeholder="Password">
+                    <small class="text-muted">Kosongkan jika tidak diubah</small>
+                </div>
+                <div class="form-group" id="prodiGroup" style="display:none;">
+                    <label for="prodiInput">Program Studi</label>
+                    <select id="prodiInput" class="form-control">
+                        <option value="TI">Teknik Informatika</option>
+                        <option value="SI">Sistem Informasi</option>
+                    </select>
+                </div>
+                <div class="form-group" id="angkatanGroup" style="display:none;">
+                    <label for="angkatanInput">Angkatan</label>
+                    <select id="angkatanInput" class="form-control">
+                        <option value="2025">2025</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                    </select>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">💾 Simpan</button>
+                    <button type="button" class="btn btn-outline" onclick="closeModal()">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 🔥 MODAL UBAH PASSWORD -->
+    <div class="modal-overlay" id="passwordModal">
+        <div class="modal" style="max-width: 400px;">
+            <h3 class="modal-title">🔑 Ubah Password</h3>
+            <form id="passwordForm">
+                <div class="form-group">
+                    <label for="oldPassword">Password Lama</label>
+                    <input type="password" id="oldPassword" class="form-control" placeholder="Masukkan password lama" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">Password Baru</label>
+                    <input type="password" id="newPassword" class="form-control" placeholder="Minimal 6 karakter" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Konfirmasi Password Baru</label>
+                    <input type="password" id="confirmPassword" class="form-control" placeholder="Ulangi password baru" required>
+                </div>
+                <div id="passwordMessage" class="error" style="margin-top: 0.5rem; display: none;"></div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary" id="savePasswordBtn">💾 Simpan</button>
+                    <button type="button" class="btn btn-outline" onclick="closePasswordModal()">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/admin.js"></script>
+</body>
+</html>

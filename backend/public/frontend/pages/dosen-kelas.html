@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelas Saya - E-Tugas</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="brand">📚 E-<span>Tugas</span></div>
+            <nav>
+                <a href="#" onclick="window.location.href='dosen-dashboard.html'">📊 Dashboard</a>
+                <a href="#" class="active">📚 Kelas Saya</a>
+                <a href="#" onclick="window.location.href='dosen-nilai.html'">📝 Nilai</a>
+                <a href="#" onclick="logout()">🚪 Logout</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <header class="topbar">
+                <h2>📚 Kelas Saya</h2>
+                <div class="user-info">
+                    <span id="dosenName">Dosen</span>
+                    <div class="avatar" id="dosenAvatar">D</div>
+                </div>
+            </header>
+
+            <!-- FILTER & TOMBOL TAMBAH -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <select id="filterProdi" class="form-control" style="width: auto; min-width: 120px;" onchange="applyFilters()">
+                            <option value="all">📚 Semua Prodi</option>
+                            <option value="TI">Teknik Informatika</option>
+                            <option value="SI">Sistem Informasi</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <select id="filterAngkatan" class="form-control" style="width: auto; min-width: 120px;" onchange="applyFilters()">
+                            <option value="all">📅 Semua Angkatan</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <select id="filterStatus" class="form-control" style="width: auto; min-width: 120px;" onchange="applyFilters()">
+                            <option value="all">🔄 Semua Status</option>
+                            <option value="aktif">🟢 Aktif</option>
+                            <option value="ditutup">🔴 Ditutup</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-outline btn-sm" onclick="resetFilters()">🔄 Reset</button>
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="showBukaKelas()">+ Buka Kelas</button>
+            </div>
+
+            <!-- DAFTAR KELAS -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">📚 Daftar Kelas</h3>
+                    <span id="totalKelasFilter" style="color: var(--gray-500); font-size: 0.875rem;"></span>
+                </div>
+                <div class="table-container">
+                    <table class="table" id="kelasTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nama Kelas</th>
+                                <th>Kode</th>
+                                <th>Prodi</th>
+                                <th>Angkatan</th>
+                                <th>Kelas</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="kelasTableBody">
+                            <tr><td colspan="8" class="text-center">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL BUKA KELAS -->
+    <div class="modal-overlay" id="bukaKelasModal">
+        <div class="modal">
+            <h3 class="modal-title">✏️ Buka Kelas Baru</h3>
+            <form id="bukaKelasForm">
+                <div class="form-group">
+                    <label for="namaKelas">Nama Kelas</label>
+                    <input type="text" id="namaKelas" class="form-control" placeholder="Contoh: Pemrograman Web 1" required>
+                </div>
+                <div class="form-group">
+                    <label for="kodeKelas">Kode Kelas</label>
+                    <input type="text" id="kodeKelas" class="form-control" placeholder="Contoh: WEB101" required>
+                </div>
+                <div class="form-group">
+                    <label for="deskripsiKelas">Deskripsi (Opsional)</label>
+                    <input type="text" id="deskripsiKelas" class="form-control" placeholder="Deskripsi kelas">
+                </div>
+                <div class="form-group">
+                    <label for="prodiKelas">Program Studi</label>
+                    <select id="prodiKelas" class="form-control">
+                        <option value="TI">Teknik Informatika</option>
+                        <option value="SI">Sistem Informasi</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="angkatanKelas">Angkatan</label>
+                    <select id="angkatanKelas" class="form-control">
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="kelasKelas">Kelas</label>
+                    <select id="kelasKelas" class="form-control">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">💾 Buka Kelas</button>
+                    <button type="button" class="btn btn-outline" onclick="closeBukaKelas()">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL KONFIRMASI -->
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal" style="max-width: 400px;">
+            <h3 class="modal-title">⚠️ Konfirmasi</h3>
+            <p id="confirmMessage">Apakah Anda yakin?</p>
+            <div class="modal-actions">
+                <button class="btn btn-danger" id="confirmYesBtn">Ya</button>
+                <button class="btn btn-outline" onclick="closeConfirm()">Batal</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/dosen-kelas.js"></script>
+</body>
+</html>

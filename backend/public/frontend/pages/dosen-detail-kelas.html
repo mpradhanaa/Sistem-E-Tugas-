@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Kelas - E-Tugas</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="brand">📚 E-<span>Tugas</span></div>
+            <nav>
+                <a href="#" onclick="window.location.href='dosen-dashboard.html'">📊 Dashboard</a>
+                <a href="#" onclick="window.location.href='dosen-kelas.html'">📚 Kelas Saya</a>
+                <a href="#" class="active">📚 Detail Kelas</a>
+                <a href="#" onclick="logout()">🚪 Logout</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <h2 id="kelasTitle">📚 Detail Kelas</h2>
+                <div class="user-info">
+                    <span id="dosenName">Dosen</span>
+                    <div class="avatar" id="dosenAvatar">D</div>
+                </div>
+            </header>
+
+            <!-- INFO KELAS -->
+            <div class="card" style="margin-bottom: 1rem;">
+                <div id="kelasInfo">Loading...</div>
+            </div>
+
+            <!-- DAFTAR MAHASISWA -->
+<div class="card" style="margin-bottom: 1rem;">
+    <div class="card-header">
+        <h3 class="card-title">👥 Daftar Mahasiswa</h3>
+        <span id="totalMahasiswa" style="color: var(--gray-500); font-size: 0.875rem;"></span>
+    </div>
+    <div class="table-container">
+        <table class="table" id="mahasiswaTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>NPM</th>
+                    <th>Nama</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="mahasiswaTableBody">
+                <tr><td colspan="4" class="text-center">Loading...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+            <!-- KIRIM TUGAS -->
+            <div class="card" style="margin-bottom: 1rem;">
+                <h3 class="card-title">📝 Kirim Tugas</h3>
+                <form id="kirimTugasForm" style="margin-top: 1rem;">
+                    <div class="form-group">
+                        <label for="judulTugas">Judul Tugas</label>
+                        <input type="text" id="judulTugas" class="form-control" placeholder="Judul tugas" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="deskripsiTugas">Deskripsi</label>
+                        <textarea id="deskripsiTugas" class="form-control" rows="3" placeholder="Deskripsi tugas"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="lampiranTugas">Lampiran (File)</label>
+                        <input type="file" id="lampiranTugas" class="form-control" accept=".pdf,.doc,.docx,.zip,.rar">
+                        <small class="text-muted">Max 5MB. Format: PDF, DOC, DOCX, ZIP, RAR</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="deadlineTugas">Deadline</label>
+                        <input type="datetime-local" id="deadlineTugas" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">🚀 Kirim Tugas</button>
+                </form>
+            </div>
+
+            <!-- DAFTAR TUGAS -->
+            <div class="card">
+                <h3 class="card-title">📋 Daftar Tugas</h3>
+                <div class="table-container">
+                    <table class="table" id="tugasTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Judul</th>
+                                <th>Deadline</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tugasTableBody">
+                            <tr><td colspan="4" class="text-center">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/dosen-detail.js"></script>
+</body>
+</html>

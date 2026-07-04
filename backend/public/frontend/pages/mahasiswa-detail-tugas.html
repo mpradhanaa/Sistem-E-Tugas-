@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Tugas - E-Tugas</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="brand">📚 E-<span>Tugas</span></div>
+            <nav>
+                <a href="#" onclick="window.location.href='mahasiswa-dashboard.html'">📊 Dashboard</a>
+                <a href="#" class="active">📋 Detail Tugas</a>
+                <a href="#" onclick="logout()">🚪 Logout</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <header class="topbar">
+    <div style="display: flex; align-items: center; gap: 1rem;">
+        <button class="btn btn-outline btn-sm" onclick="window.location.href='mahasiswa-tugas.html'" style="padding: 0.25rem 0.75rem;">
+            ← Kembali
+        </button>
+        <h2 id="tugasTitle">📋 Detail Tugas</h2>
+    </div>
+    <div class="user-info">
+        <span id="mhsName">Mahasiswa</span>
+        <div class="avatar" id="mhsAvatar">M</div>
+    </div>
+</header>
+
+            <!-- DETAIL TUGAS -->
+            <div class="card" style="margin-bottom: 1rem;">
+                <div id="tugasInfo">
+                    <p><strong>Judul:</strong> <span id="detailJudul">-</span></p>
+                    <p><strong>Deskripsi:</strong> <span id="detailDeskripsi">-</span></p>
+                    <p><strong>Kelas:</strong> <span id="detailKelas">-</span></p>
+                    <p><strong>Dosen:</strong> <span id="detailDosen">-</span></p>
+                    <p><strong>Deadline:</strong> <span id="detailDeadline">-</span></p>
+                    <p><strong>Status:</strong> <span id="detailStatus">-</span></p>
+                    <p><strong>Nilai:</strong> <span id="detailNilai">-</span></p>
+                    <p><strong>Feedback:</strong> <span id="detailFeedback">-</span></p>
+
+                    <!-- 🔥 PREVIEW LAMPIRAN TUGAS -->
+                    <div id="filePreviewSection" style="margin-top: 1rem; display: none;">
+                        <p><strong>📎 Lampiran Tugas:</strong></p>
+                        <div id="filePreviewContent" style="border: 1px solid var(--gray-300); border-radius: 8px; padding: 1rem; background: var(--gray-50);">
+                            <!-- Isi akan diisi oleh JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KUMPULKAN TUGAS -->
+            <div class="card" id="uploadSection">
+                <h3 class="card-title">📤 Kumpulkan Tugas</h3>
+                <form id="submitForm" style="margin-top: 1rem;">
+                    <div class="form-group">
+                        <label for="fileInput">📎 Pilih File Jawaban</label>
+                        <input type="file" id="fileInput" class="form-control" accept=".pdf,.doc,.docx,.zip,.rar,.jpg,.png,.jpeg,.gif,.txt" required>
+                        <small class="text-muted">Max 5MB. Format: PDF, DOC, DOCX, ZIP, RAR, JPG, PNG, TXT</small>
+                    </div>
+
+                    <!-- 🔥 PREVIEW FILE SEBELUM UPLOAD -->
+                    <div id="uploadPreviewSection" style="display: none; margin-top: 1rem;">
+                        <p><strong>📄 Preview File:</strong></p>
+                        <div id="uploadPreviewContainer" style="border: 1px solid var(--gray-300); border-radius: 8px; padding: 1rem; background: var(--gray-50);">
+                            <div id="uploadPreviewContent"></div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">🚀 Kumpulkan</button>
+                    <div id="submitMessage" class="error" style="margin-top: 0.5rem;"></div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- 🔥 MODAL PREVIEW PDF / FILE -->
+    <div class="modal-overlay" id="pdfModal">
+        <div class="modal" style="max-width: 800px; width: 95%; max-height: 90vh;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h3 class="modal-title">📄 Preview File</h3>
+                <button class="btn btn-outline btn-sm" onclick="closePdfModal()">✖ Tutup</button>
+            </div>
+            <div id="pdfViewer" style="height: 70vh; overflow: auto; background: #f0f0f0; border-radius: 8px;">
+                <div id="pdfLoading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                    <p style="color: var(--gray-500);">🔄 Memuat file...</p>
+                </div>
+            </div>
+            <div style="margin-top: 1rem; text-align: right;">
+                <button class="btn btn-success btn-sm" id="downloadPdfBtn">📥 Download</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/mahasiswa-detail.js"></script>
+</body>
+</html>

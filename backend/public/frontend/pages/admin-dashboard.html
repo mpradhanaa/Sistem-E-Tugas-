@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - E-Tugas</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="brand">📚 E-<span>Tugas</span></div>
+    <nav>
+        <a href="#" class="active" onclick="location.reload()">📊 Dashboard</a>
+        <a href="#" onclick="window.location.href='admin-users.html'">👥 Kelola User</a>
+        <a href="#" onclick="showChangePassword()">🔑 Ubah Password</a>
+        <a href="#" onclick="logout()">🚪 Logout</a>
+    </nav>
+</aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- TOPBAR -->
+            <header class="topbar">
+                <h2>Dashboard Admin</h2>
+                <div class="user-info">
+                    <span id="adminName">Admin</span>
+                    <div class="avatar" id="adminAvatar">A</div>
+                </div>
+            </header>
+
+            <!-- STATS -->
+            <div class="stats-grid" id="statsContainer">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalDosen">0</div>
+                    <div class="stat-label">👨‍🏫 Total Dosen</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalMahasiswa">0</div>
+                    <div class="stat-label">👨‍🎓 Total Mahasiswa</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalKelas">0</div>
+                    <div class="stat-label">📚 Total Kelas</div>
+                </div>
+            </div>
+
+            <!-- USER MANAGEMENT -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">👥 Daftar User</h3>
+                    <div>
+                        <button class="btn btn-primary btn-sm" onclick="showModal('dosen')">+ Tambah Dosen</button>
+                        <button class="btn btn-success btn-sm" onclick="showModal('mahasiswa')">+ Tambah Mahasiswa</button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="table" id="userTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Nama</th>
+                                <th>Role</th>
+                                <th>Prodi</th>
+                                <th>Angkatan</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userTableBody">
+                            <tr><td colspan="7" class="text-center">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL TAMBAH/EDIT USER -->
+    <div class="modal-overlay" id="userModal">
+        <div class="modal">
+            <h3 class="modal-title" id="modalTitle">Tambah User</h3>
+            <form id="userForm">
+                <input type="hidden" id="userRole">
+                <input type="hidden" id="editUserId">
+
+                <div class="form-group">
+                    <label for="usernameInput">Username</label>
+                    <input type="text" id="usernameInput" class="form-control" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <label for="nameInput">Nama Lengkap</label>
+                    <input type="text" id="nameInput" class="form-control" placeholder="Nama lengkap" required>
+                </div>
+                <div class="form-group">
+                    <label for="passwordInput">Password</label>
+                    <input type="password" id="passwordInput" class="form-control" placeholder="Password">
+                    <small class="text-muted">Kosongkan jika tidak diubah</small>
+                </div>
+                <div class="form-group" id="prodiGroup" style="display:none;">
+                    <label for="prodiInput">Program Studi</label>
+                    <select id="prodiInput" class="form-control">
+                        <option value="TI">Teknik Informatika</option>
+                        <option value="SI">Sistem Informasi</option>
+                    </select>
+                </div>
+                <div class="form-group" id="angkatanGroup" style="display:none;">
+                    <label for="angkatanInput">Angkatan</label>
+                    <select id="angkatanInput" class="form-control">
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                    </select>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">💾 Simpan</button>
+                    <button type="button" class="btn btn-outline" onclick="closeModal()">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<!-- MODAL UBAH PASSWORD -->
+<div class="modal-overlay" id="passwordModal">
+    <div class="modal" style="max-width: 400px;">
+        <h3 class="modal-title">🔑 Ubah Password</h3>
+        <form id="passwordForm">
+            <div class="form-group">
+                <label for="oldPassword">Password Lama</label>
+                <input type="password" id="oldPassword" class="form-control" placeholder="Masukkan password lama" required>
+            </div>
+            <div class="form-group">
+                <label for="newPassword">Password Baru</label>
+                <input type="password" id="newPassword" class="form-control" placeholder="Minimal 6 karakter" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Konfirmasi Password Baru</label>
+                <input type="password" id="confirmPassword" class="form-control" placeholder="Ulangi password baru" required>
+            </div>
+            <div id="passwordMessage" class="error" style="margin-top: 0.5rem; display: none;"></div>
+            <div class="modal-actions">
+                <button type="submit" class="btn btn-primary" id="savePasswordBtn">💾 Simpan</button>
+                <button type="button" class="btn btn-outline" onclick="closePasswordModal()">Batal</button>
+            </div>
+        </form>
+    </div>
+</div>
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/admin.js"></script>
+</body>
+</html>

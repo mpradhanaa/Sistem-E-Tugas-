@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nilai - E-Tugas</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="brand">📚 E-<span>Tugas</span></div>
+            <nav>
+                <a href="#" onclick="window.location.href='mahasiswa-dashboard.html'">📊 Dashboard</a>
+                <a href="#" onclick="window.location.href='mahasiswa-tugas.html'">📋 Tugas Saya</a>
+                <a href="#" class="active">📊 Nilai</a>
+                <a href="#" onclick="window.location.href='mahasiswa-kelas.html'">📚 Kelas Saya</a>
+                <a href="#" onclick="logout()">🚪 Logout</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- TOPBAR -->
+            <header class="topbar">
+                <h2>📊 Nilai Saya</h2>
+                <div class="user-info">
+                    <span id="mhsName">Mahasiswa</span>
+                    <div class="avatar" id="mhsAvatar">M</div>
+                </div>
+            </header>
+
+            <!-- RATA-RATA NILAI -->
+            <div class="card" style="margin-bottom: 1rem;">
+                <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                    <div>
+                        <p style="color: var(--gray-500); font-size: 0.875rem;">📊 Rata-rata Nilai</p>
+                        <p style="font-size: 2rem; font-weight: 800; color: var(--primary);" id="rataRata">-</p>
+                    </div>
+                    <div>
+                        <p style="color: var(--gray-500); font-size: 0.875rem;">✅ Total Tugas Dinilai</p>
+                        <p style="font-size: 2rem; font-weight: 800; color: var(--success);" id="totalDinilai">-</p>
+                    </div>
+                    <div>
+                        <p style="color: var(--gray-500); font-size: 0.875rem;">⏳ Belum Dinilai</p>
+                        <p style="font-size: 2rem; font-weight: 800; color: var(--warning);" id="totalBelumDinilai">-</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABEL NILAI -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">📋 Daftar Nilai</h3>
+                    <span id="totalNilaiFilter" style="color: var(--gray-500); font-size: 0.875rem;"></span>
+                </div>
+                <div class="table-container">
+                    <table class="table" id="nilaiTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Judul Tugas</th>
+                                <th>Kelas</th>
+                                <th>Nilai</th>
+                                <th>Feedback</th>
+                                <th>File Jawaban</th>
+                            </tr>
+                        </thead>
+                        <tbody id="nilaiTableBody">
+                            <tr><td colspan="5" class="text-center">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL FEEDBACK -->
+    <div class="modal-overlay" id="feedbackModal">
+        <div class="modal" style="max-width: 500px;">
+            <h3 class="modal-title">💬 Feedback Dosen</h3>
+            <div id="feedbackContent">
+                <p><strong>Judul Tugas:</strong> <span id="fbJudul">-</span></p>
+                <p><strong>Kelas:</strong> <span id="fbKelas">-</span></p>
+                <p><strong>Nilai:</strong> <span id="fbNilai">-</span></p>
+                <p><strong>Feedback:</strong></p>
+                <p id="fbText" style="background: var(--gray-100); padding: 1rem; border-radius: 8px; margin-top: 0.5rem;">-</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" onclick="closeFeedback()">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+<!-- MODAL PREVIEW FILE -->
+<div class="modal-overlay" id="pdfModal">
+    <div class="modal" style="max-width: 800px; width: 95%; max-height: 90vh;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h3 class="modal-title">📄 Preview File</h3>
+            <button class="btn btn-outline btn-sm" onclick="closePdfModal()">✖ Tutup</button>
+        </div>
+        <div id="pdfViewer" style="height: 70vh; overflow: auto; background: #f0f0f0; border-radius: 8px;">
+            <div id="pdfLoading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                <p style="color: var(--gray-500);">🔄 Memuat file...</p>
+            </div>
+        </div>
+        <div style="margin-top: 1rem; text-align: right;">
+        </div>
+    </div>
+</div>
+
+    <script src="../assets/js/auth.js"></script>
+    <script src="../assets/js/mahasiswa-nilai.js"></script>
+</body>
+</html>
