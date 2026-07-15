@@ -114,7 +114,7 @@ public function dashboard()
             ])->setStatusCode(404);
         }
 
-        // 🔥 CEK DEADLINE (Status kelas diabaikan)
+        //  CEK DEADLINE (Status kelas diabaikan)
         $now = date('Y-m-d H:i:s');
         if ($now > $tugas['deadline']) {
             return $this->response->setJSON([
@@ -136,7 +136,7 @@ public function dashboard()
             ])->setStatusCode(400);
         }
 
-        // 🔥 CEK FILE
+        //  CEK FILE
         if (!$file || !$file->isValid()) {
             return $this->response->setJSON([
                 'status' => 400,
@@ -227,7 +227,7 @@ public function preview($filename)
     
     $filePath = WRITEPATH . 'uploads/' . $filename;
     
-    // 🔥 TAMBAHKAN LOG INI
+    // Log untuk debugging
     log_message('debug', '🔍 Mencari file di: ' . $filePath);
     log_message('debug', '📄 File exists: ' . (file_exists($filePath) ? 'YES' : 'NO'));
 
@@ -255,7 +255,7 @@ public function preview($filename)
 
     $mime = $mimeTypes[strtolower($extension)] ?? 'application/octet-stream';
 
-    // 🔥 KIRIM FILE TANPA HEADER CONTENT-DISPOSITION (AGAR TIDAK DOWNLOAD)
+    //  KIRIM FILE TANPA HEADER 
     return $this->response
         ->setHeader('Content-Type', $mime)
         ->setBody(file_get_contents($filePath));

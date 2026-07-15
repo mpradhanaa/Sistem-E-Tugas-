@@ -19,8 +19,8 @@ $routes->group('api/v1', ['filter' => 'cors'], function ($routes) {
         $routes->get('/', 'User::index');
         $routes->post('dosen', 'User::createDosen');
         $routes->post('mahasiswa', 'User::createMahasiswa');
-        $routes->put('(:num)', 'User::update/$1');      // ✅ SATU SLASH
-        $routes->delete('(:num)', 'User::delete/$1');   // ✅ SATU SLASH
+        $routes->put('(:num)', 'User::update/$1');      
+        $routes->delete('(:num)', 'User::delete/$1');   
     });
 
     // DOSEN - KELAS
