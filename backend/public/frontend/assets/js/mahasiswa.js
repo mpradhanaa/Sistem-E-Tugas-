@@ -137,7 +137,7 @@ async function loadDeadlineTugas() {
             });
         } else {
             countEl.textContent = '📊 Tidak ada tugas deadline mendekat';
-            tbody.innerHTML = '<tr><td colspan="7" class="text-center">✅ Semua tugas sudah dikumpulkan atau masih aman</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="7" class="text-center">✅ Semua tugas sudah dikumpulkan atau periksa kembali tugas anda</td></tr>';
         }
     } catch (error) {
         console.error('Error loading deadline tugas:', error);

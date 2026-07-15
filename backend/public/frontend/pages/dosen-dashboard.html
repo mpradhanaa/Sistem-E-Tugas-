@@ -5,19 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dosen Dashboard - E-Tugas</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <div class="dashboard">
         <!-- SIDEBAR -->
-        <aside class="sidebar">
-    <div class="brand">📚 E-<span>Tugas</span></div>
+       <aside class="sidebar">
+    <div class="brand"> E-<span>Tugas</span></div>
     <nav>
-        <a href="#" class="active" onclick="location.reload()">📊 Dashboard</a>
-        <a href="#" onclick="window.location.href='dosen-kelas.html'">📚 Kelas Saya</a>
-        <a href="#" onclick="showBukaKelas()">✏️ Buka Kelas</a>
-        <a href="#" onclick="window.location.href='dosen-nilai.html'">📝 Nilai</a>
-        <a href="#" onclick="showChangePassword()">🔑 Ubah Password</a>
-        <a href="#" onclick="logout()">🚪 Logout</a>
+        <a href="#" onclick="window.location.href='dosen-dashboard.html'" class="active">
+            <i class="fas fa-chart-pie"></i> Dashboard
+        </a>
+        <a href="#" onclick="window.location.href='dosen-kelas.html'">
+            <i class="fas fa-book"></i> Kelas Saya
+        </a>
+        <a href="#" onclick="showBukaKelas()">
+            <i class="fas fa-pen"></i> Buka Kelas
+        </a>
+        <a href="#" onclick="window.location.href='dosen-nilai.html'">
+            <i class="fas fa-clipboard-list"></i> Nilai
+        </a>
+        <a href="#" onclick="showChangePassword()">
+            <i class="fas fa-key"></i> Ubah Password
+        </a>
+        <a href="#" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
     </nav>
 </aside>
 
@@ -120,7 +133,7 @@
                     </select>
                 </div>
                 <div class="modal-actions">
-                    <button type="submit" class="btn btn-primary">💾 Buka Kelas</button>
+                    <button type="submit" class="btn btn-primary"> Buka Kelas</button>
                     <button type="button" class="btn btn-outline" onclick="closeBukaKelas()">Batal</button>
                 </div>
             </form>
@@ -159,7 +172,7 @@
             </div>
             <div id="passwordMessage" class="error" style="margin-top: 0.5rem; display: none;"></div>
             <div class="modal-actions">
-                <button type="submit" class="btn btn-primary" id="savePasswordBtn">💾 Simpan</button>
+                <button type="submit" class="btn btn-primary" id="savePasswordBtn"> Simpan</button>
                 <button type="button" class="btn btn-outline" onclick="closePasswordModal()">Batal</button>
             </div>
         </form>

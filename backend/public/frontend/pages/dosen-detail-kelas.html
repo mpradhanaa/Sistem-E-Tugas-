@@ -5,18 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Kelas - E-Tugas</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <div class="dashboard">
         <aside class="sidebar">
-            <div class="brand">📚 E-<span>Tugas</span></div>
-            <nav>
-                <a href="#" onclick="window.location.href='dosen-dashboard.html'">📊 Dashboard</a>
-                <a href="#" onclick="window.location.href='dosen-kelas.html'">📚 Kelas Saya</a>
-                <a href="#" class="active">📚 Detail Kelas</a>
-                <a href="#" onclick="logout()">🚪 Logout</a>
-            </nav>
-        </aside>
+    <div class="brand"> E-<span>Tugas</span></div>
+    <nav>
+        <a href="#" onclick="location.reload()" class="active">
+            <i class="fas fa-chart-pie"></i> Dashboard
+        </a>
+        <a href="#" onclick="window.location.href='dosen-kelas.html'">
+            <i class="fas fa-book"></i> Kelas Saya
+        </a>
+        <a href="#" onclick="showBukaKelas()">
+            <i class="fas fa-pen"></i> Buka Kelas
+        </a>
+        <a href="#" onclick="window.location.href='dosen-nilai.html'">
+            <i class="fas fa-clipboard-list"></i> Nilai
+        </a>
+        <a href="#" onclick="showChangePassword()">
+            <i class="fas fa-key"></i> Ubah Password
+        </a>
+        <a href="#" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+    </nav>
+</aside>
 
         <main class="main-content">
             <header class="topbar">
@@ -101,6 +116,32 @@
             </div>
         </main>
     </div>
+
+        <!-- MODAL UBAH PASSWORD -->
+<div class="modal-overlay" id="passwordModal">
+    <div class="modal" style="max-width: 400px;">
+        <h3 class="modal-title">🔑 Ubah Password</h3>
+        <form id="passwordForm">
+            <div class="form-group">
+                <label for="oldPassword">Password Lama</label>
+                <input type="password" id="oldPassword" class="form-control" placeholder="Masukkan password lama" required>
+            </div>
+            <div class="form-group">
+                <label for="newPassword">Password Baru</label>
+                <input type="password" id="newPassword" class="form-control" placeholder="Minimal 6 karakter" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Konfirmasi Password Baru</label>
+                <input type="password" id="confirmPassword" class="form-control" placeholder="Ulangi password baru" required>
+            </div>
+            <div id="passwordMessage" class="error" style="margin-top: 0.5rem; display: none;"></div>
+            <div class="modal-actions">
+                <button type="submit" class="btn btn-primary" id="savePasswordBtn"> Simpan</button>
+                <button type="button" class="btn btn-outline" onclick="closePasswordModal()">Batal</button>
+            </div>
+        </form>
+    </div>
+</div>
 
     <script src="../assets/js/auth.js"></script>
     <script src="../assets/js/dosen-detail.js"></script>

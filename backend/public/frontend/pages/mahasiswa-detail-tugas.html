@@ -5,16 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Tugas - E-Tugas</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <div class="dashboard">
         <!-- SIDEBAR -->
         <aside class="sidebar">
-            <div class="brand">📚 E-<span>Tugas</span></div>
+            <div class="brand"> E-<span>Tugas</span></div>
             <nav>
-                <a href="#" onclick="window.location.href='mahasiswa-dashboard.html'">📊 Dashboard</a>
-                <a href="#" class="active">📋 Detail Tugas</a>
-                <a href="#" onclick="logout()">🚪 Logout</a>
+                <a href="#" onclick="window.location.href='mahasiswa-dashboard.html'" class="active">
+            <i class="fas fa-chart-pie"></i> Dashboard
+                </a>
+                <a href="#" onclick="window.location.href='mahasiswa-tugas.html'">
+                    <i class="fas fa-tasks"></i> Tugas Saya
+                </a>
+                <a href="#" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
             </nav>
         </aside>
 
@@ -25,7 +32,7 @@
         <button class="btn btn-outline btn-sm" onclick="window.location.href='mahasiswa-tugas.html'" style="padding: 0.25rem 0.75rem;">
             ← Kembali
         </button>
-        <h2 id="tugasTitle">📋 Detail Tugas</h2>
+        <h2 id="tugasTitle"> Detail Tugas</h2>
     </div>
     <div class="user-info">
         <span id="mhsName">Mahasiswa</span>
@@ -57,7 +64,7 @@
 
             <!-- KUMPULKAN TUGAS -->
             <div class="card" id="uploadSection">
-                <h3 class="card-title">📤 Kumpulkan Tugas</h3>
+                <h3 class="card-title"> Kumpulkan Tugas</h3>
                 <form id="submitForm" style="margin-top: 1rem;">
                     <div class="form-group">
                         <label for="fileInput">📎 Pilih File Jawaban</label>

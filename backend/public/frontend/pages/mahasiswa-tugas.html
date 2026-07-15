@@ -5,23 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tugas Saya - E-Tugas</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <div class="dashboard">
-        <aside class="sidebar">
-            <div class="brand">📚 E-<span>Tugas</span></div>
-            <nav>
-                <a href="#" onclick="window.location.href='mahasiswa-dashboard.html'">📊 Dashboard</a>
-                <a href="#" class="active">📋 Tugas Saya</a>
-                <a href="#" onclick="window.location.href='mahasiswa-nilai.html'">📊 Nilai</a>
-                <a href="#" onclick="window.location.href='mahasiswa-kelas.html'">📚 Kelas Saya</a>
-                <a href="#" onclick="logout()">🚪 Logout</a>
-            </nav>
-        </aside>
-
+<aside class="sidebar">
+    <div class="brand"> E-<span>Tugas</span></div>
+    <nav>
+        <a href="#" onclick="window.location.href='mahasiswa-dashboard.html'" class="active">
+            <i class="fas fa-chart-pie"></i> Dashboard
+        </a>
+        <a href="#" onclick="window.location.href='mahasiswa-tugas.html'">
+            <i class="fas fa-tasks"></i> Tugas Saya
+        </a>
+        <a href="#" onclick="window.location.href='mahasiswa-nilai.html'">
+            <i class="fas fa-graduation-cap"></i> Nilai
+        </a>
+        <a href="#" onclick="window.location.href='mahasiswa-kelas.html'">
+            <i class="fas fa-book"></i> Kelas Saya
+        </a>
+        <a href="#" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+    </nav>
+</aside>
         <main class="main-content">
             <header class="topbar">
-                <h2>📋 Tugas Saya</h2>
+                <h2> Tugas Saya</h2>
                 <div class="user-info">
                     <span id="mhsName">Mahasiswa</span>
                     <div class="avatar" id="mhsAvatar">M</div>

@@ -5,19 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kelola User - E-Tugas</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <div class="dashboard">
         <!-- SIDEBAR -->
         <aside class="sidebar">
-            <div class="brand">📚 E-<span>Tugas</span></div>
-            <nav>
-                <a href="#" onclick="window.location.href='admin-dashboard.html'">📊 Dashboard</a>
-                <a href="#" class="active">👥 Kelola User</a>
-                <a href="#" onclick="showChangePassword()">🔑 Ubah Password</a> <!-- 🔥 TAMBAHKAN INI -->
-                <a href="#" onclick="logout()">🚪 Logout</a>
-            </nav>
-        </aside>
+    <div class="brand"> E-<span>Tugas</span></div>
+    <nav>
+        <a href="#" onclick="window.location.href='admin-dashboard.html'" class="active">
+            <i class="fas fa-chart-pie"></i> Dashboard
+        </a>
+        <a href="#" onclick="window.location.href='admin-users.html'">
+            <i class="fas fa-users-cog"></i> Kelola User
+        </a>
+        <a href="#" onclick="showChangePassword()">
+            <i class="fas fa-key"></i> Ubah Password
+        </a>
+        <a href="#" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+    </nav>
+</aside>
 
         <!-- MAIN CONTENT -->
         <main class="main-content">

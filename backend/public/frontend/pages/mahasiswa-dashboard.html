@@ -5,19 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Mahasiswa - E-Tugas</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <div class="dashboard">
         <!-- SIDEBAR -->
 <aside class="sidebar">
-    <div class="brand">📚 E-<span>Tugas</span></div>
+    <div class="brand"> E-<span>Tugas</span></div>
     <nav>
-        <a href="#" class="active" onclick="location.reload()">📊 Dashboard</a>
-        <a href="#" onclick="window.location.href='mahasiswa-tugas.html'">📋 Tugas Saya</a>
-        <a href="#" onclick="window.location.href='mahasiswa-nilai.html'">📊 Nilai</a>
-        <a href="#" onclick="window.location.href='mahasiswa-kelas.html'">📚 Kelas Saya</a>
-        <a href="#" onclick="showChangePassword()">🔑 Ubah Password</a>
-        <a href="#" onclick="logout()">🚪 Logout</a>
+        <a href="#" onclick="location.reload()" class="active">
+            <i class="fas fa-chart-pie"></i> Dashboard
+        </a>
+        <a href="#" onclick="window.location.href='mahasiswa-tugas.html'">
+            <i class="fas fa-tasks"></i> Tugas Saya
+        </a>
+        <a href="#" onclick="window.location.href='mahasiswa-nilai.html'">
+            <i class="fas fa-graduation-cap"></i> Nilai
+        </a>
+        <a href="#" onclick="window.location.href='mahasiswa-kelas.html'">
+            <i class="fas fa-book"></i> Kelas Saya
+        </a>
+        <a href="#" onclick="showChangePassword()">
+            <i class="fas fa-key"></i> Ubah Password
+        </a>
+        <a href="#" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
     </nav>
 </aside>
 
@@ -25,7 +38,7 @@
         <main class="main-content">
             <!-- TOPBAR -->
             <header class="topbar">
-                <h2>📊 Dashboard Mahasiswa</h2>
+                <h2> Dashboard Mahasiswa</h2>
                 <div class="user-info">
                     <span id="mhsName">Mahasiswa</span>
                     <div class="avatar" id="mhsAvatar" onclick="showChangePassword()" style="cursor: pointer;" title="Klik untuk ubah password">M</div>
@@ -132,7 +145,7 @@
             </div>
             <div id="passwordMessage" class="error" style="margin-top: 0.5rem; display: none;"></div>
             <div class="modal-actions">
-                <button type="submit" class="btn btn-primary" id="savePasswordBtn">💾 Simpan</button>
+                <button type="submit" class="btn btn-primary" id="savePasswordBtn"> Simpan</button>
                 <button type="button" class="btn btn-outline" onclick="closePasswordModal()">Batal</button>
             </div>
         </form>
